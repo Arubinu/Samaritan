@@ -23,10 +23,19 @@ var vis = ( function () {
 } )();
 
 $( document ).ready( function () {
-	if ( jQuery.browser.mobile )
+	window.scrollTo( 0, 1 );
+	var agent = navigator.userAgent.toLowerCase();
+	var android = /android/i.test( agent ) && /linux/i.test( agent );
+	if ( jQuery.browser.mobile || android )
 	{
 		$( 'body' ).addClass( 'mobile' );
+
+		if ( android )
+			$( '#triangle' ).css( { fontSize: '4.8rem' } );
 	}
+
+	if ( !$( '#box' ).offset().top )
+		$( '#box' ).css( { top: Math.floor( ( $( 'body' ).height() - $( '#box' ).height() ) / 2 ) + 'px' } );
 
 	var active = true;
 	var cursor = [ 0, 0 ];
