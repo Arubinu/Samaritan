@@ -1,9 +1,34 @@
+var vis = ( function () {
+	var stateKey,
+		eventKey,
+		keys = {
+				hidden: 'visibilitychange',
+				webkitHidden: 'webkitvisibilitychange',
+				mozHidden: 'mozvisibilitychange',
+				msHidden: 'msvisibilitychange'
+	};
+	for ( stateKey in keys )
+	{
+		if ( stateKey in document )
+		{
+			eventKey = keys[ stateKey ];
+			break ;
+		}
+	}
+	return ( function( c ) {
+		if ( c )
+			document.addEventListener( eventKey, c );
+		return ( !document[ stateKey ] );
+	} );
+} )();
+
 $( document ).ready( function () {
 	if ( jQuery.browser.mobile )
 	{
 		$( 'body' ).addClass( 'mobile' );
 	}
 
+	var active = true;
 	var cursor = [ 0, 0 ];
 	var string = [
 		[ 'FIND', 'THE', 'MACHINE' ],
@@ -18,6 +43,12 @@ $( document ).ready( function () {
 		reset = false;
 		if ( select !== undefined || cursor[ 1 ] <= 0 )
 		{
+			if ( !active )
+			{
+				callResponse( true );
+				return ;
+			}
+
 			reset = true;
 			next = Math.floor( Math.random() * 10 ) % string.length;
 
@@ -31,14 +62,20 @@ $( document ).ready( function () {
 
 		var current = string[ cursor[ 0 ] ]
 		if ( reset )
+		{
 			cursor[ 1 ] = current.length;
+//			$( '#triangle' ).animate( { fontSize: '0' } );
+		}
 
 		--cursor[ 1 ];
 		changeResponse( current[ ( current.length - 1 ) - cursor[ 1 ] ], reset, !cursor[ 1 ] );
 
 		if ( cursor[ 1 ] <= 0 )
 		{
-			setTimeout( function () { changeResponse( '&nbsp;', false, true ) }, 1250 );
+			setTimeout( function () {
+				changeResponse( '&nbsp;', false, true );
+//				$( '#triangle' ).animate( { fontSize: '2.2rem' } );
+			}, 1250 );
 			callResponse( true );
 		}
 	};
@@ -63,6 +100,10 @@ $( document ).ready( function () {
 		else
 			setTimeout( response, 750 );
 	};
+
+	setInterval( function () {
+		vis( function () { active = vis(); } );
+	}, 250 );
 
 	callResponse( true );
 } );
