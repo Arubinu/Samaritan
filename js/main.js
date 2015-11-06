@@ -82,7 +82,7 @@ $( document ).ready( function () {
 
 	var changeResponse = function ( text, first, end ) {
 		if ( first !== undefined && first == true )
-			$( '#response' ).shuffleLetters( { 'fps': 15, 'text': text, 'callback': callResponse } );
+			$( '#response' ).shuffleLetters( { 'fps': 15, 'text': text, 'scallback': function () { sizeResponse(); }, 'callback': callResponse } );
 		else
 		{
 			$( '#response' ).html( text );
@@ -90,6 +90,10 @@ $( document ).ready( function () {
 				callResponse();
 		}
 
+		sizeResponse();
+	};
+
+	var sizeResponse = function () {
 		var size = $( '#response' ).width() + 20;
 		$( '#line' ).width( ( size > 50 ) ? size : 50 );
 	};
