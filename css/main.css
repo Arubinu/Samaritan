@@ -1,0 +1,65 @@
+@keyframes fade {
+	0%		{ opacity: 0; }
+	50%		{ opacity: 1; }
+	100%	{ opacity: 0; }
+}
+@font-face {
+	font-family: 'Magda Clean Mono Regular';
+	src: url( '../fonts/magdacleanmono-regular.otf' );
+}
+
+html, body {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+body {
+	background: -moz-radial-gradient( center, ellipse cover, rgba( 255, 255, 255, .56 ) 0%, rgba( 127, 127, 127, 1 ) 100% );
+	background: -webkit-gradient( radial, center center, 0px, center center, 100%, color-stop( 0%, rgba( 255, 255, 255, .56 ) ), color-stop( 100%, rgba( 127, 127, 127, 1 ) ) );
+	background: -webkit-radial-gradient( center, ellipse cover, rgba( 255, 255, 255, .56 ) 0%, rgba( 127, 127, 127, 1 ) 100% );
+	background: -o-radial-gradient( center, ellipse cover, rgba( 255, 255, 255, .56 ) 0%, rgba( 127, 127, 127, 1 ) 100% );
+	background: -ms-radial-gradient( center, ellipse cover, rgba( 255, 255, 255, .56 ) 0%, rgba( 127, 127, 127, 1 ) 100% );
+	background: radial-gradient( center, ellipse cover, rgba( 255, 255, 255, .56 ) 0%, rgba( 127, 127, 127, 1 ) 100% );
+	background-position: center;
+	background-size: cover;
+	background-repeat: 0;
+	font-family: 'Magda Clean Mono Regular', sans-serif;
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #12232b;
+}
+body.mobile {
+	background: #000;
+	color: #fff;
+}
+#box {
+	position: fixed;
+	top: calc( ( 100% - 73px ) / 2 );
+	width: 100%;
+	text-align: center;
+}
+#response {
+	display: inline-block;
+	font-size: 2.4rem;
+	font-weight: bold;
+}
+#line {
+	margin: 2px auto 4px;
+	width: 50px;
+	height: 3px;
+	background-color: #12232b;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	transition: width .3s;
+}
+#triangle {
+	font-size: 2.2rem;
+	color: red;
+	animation: fade 1.1s infinite;
+}
+
+.mobile #line {
+	background-color: #fff;
+}
